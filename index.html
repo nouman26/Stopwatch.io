@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<!----- favicon----->
+    <link rel="icon" href="favicon.png" type="image/gif" sizes="16x16">
+
+	<title>Stopwatch</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital@1&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+
+	<style type="text/css">
+		ul{
+			display: flex;
+    		margin: auto;
+		}
+		.ti{
+			padding-inline-start: 0px;
+			padding: .375rem .75rem 0rem;
+			width: 190px;
+		}
+		
+		#Stop,#Clear{
+			margin-left: 13px;
+		}
+		.butt{
+			width: 290px;
+		}
+		.con{
+			background:linear-gradient(rgba(255,255,255,0.7) , rgba(255,255,255,0.5));
+			border-radius: 10px;
+			padding-top: 2px;
+			padding-bottom: 12px;
+		}
+		header{
+			height: 90vh;
+			padding-top: 10%;
+			padding-bottom: 10%;
+			padding-top: 20vh;
+			margin-bottom: 1%;
+			width: 100%;
+			background-image:url('cover.jpg');
+			background-repeat: no-repeat;
+			background-size: 100% 100%;
+	}
+
+	.image img{
+		max-width: 200px;
+		margin:auto;
+	}
+	.image{
+		display: flex;
+		margin-top: 3%;
+	}
+		@media screen and (max-width: 771px){
+			.lin{				/* class for copyright lines*/
+			    text-align: center;
+			    padding: 10px;
+			    margin-top: -10px;
+			    font-size:15px;
+			  }
+			}
+
+		@media screen and (min-width: 771px)
+			{
+				.lin{			/* class for copyright lines*/
+			    text-align: center;
+			    padding: 10px;
+			    margin-top: -10px;
+			  }
+			}
+	</style>
+</head>
+
+<body>
+	<a href="https://nouman26.github.io/" style="color: white; float:right; margin-right: 4%; margin-top: 1%; "><i class="fa fa-user-circle-o" aria-hidden="true"></i> About me!</a>
+	<header>
+	<h1 class="container" style="color: white; margin-bottom: 2%; text-align: center;font-family: 'Lobster Two', cursive;">STOPWATCH</h1>
+<div class="container con">
+<ul class="ti">
+	<h2 id="h">00</h2>
+	<h2> : </h2>
+	<h2 id="m">00</h2>
+	<h2> : </h2>
+	<h2 id="s">00</h2>
+	<h2> : </h2>
+	<h2 id="ms">00</h2>
+</ul>
+<ul class="butt">
+	<button id="Start" type="button" class="btn btn-success">Start</button>
+	<button id="Stop" type="button" class="btn btn-danger">Stop</button>
+	<button id="Clear" type="button" class="btn btn-secondary">Clear</button>
+</ul>
+</div>
+<div class="image container">
+	<img src="h1.png">
+	<img src="1.png">
+	<img src="3.png">
+</div>
+</header>
+<footer>
+		<h5 class="lin">©2020|All Rights Reserved By STW Calculator | Developed & Maintained by Nouman</h5>
+	</footer>
+<script type="text/javascript">
+	var c;
+	var mse=0;
+	var se=0;
+	var mi=0;
+	var hr=0;
+	var clearinterval;
+	var milisec = document.getElementById('ms');
+	var sec = document.getElementById('s');
+	var min = document.getElementById('m');
+	var hour = document.getElementById('h');
+
+	function start(){
+		if(c==clearinterval){
+			clearinterval=setInterval(second,1);
+		}
+	}
+
+	function stop(){
+		clearInterval(clearinterval);
+		c=clearinterval;               //jb hum start button 2 times press kren aur stop button press hi na kren to start function one time run hona cheye q k jb hum start button ko 2 times press kren gy to stop aur clear work nhi kren gy q k k 1st  time clearinterval ki value 1 hojae gi 2nd time 2 hojae gi aur stop aur clear sirf 2nd timer ko stop kren gy 1st wale ko nhi
+	}
+
+	function clear(){
+		clearInterval(clearinterval);
+		c=clearinterval;
+		 mse=0;
+		 se=0;
+	 	 mi=0;
+	 	 hr=0;
+	 	 milisec.innerText="00";
+	 	 sec.innerText="00";
+	 	 min.innerText="00";
+	 	 hour.innerText="00";
+	}
+	function second(){
+		milisec.innerText=mse;
+		mse++;
+		if(mse==59)  // jb milisecond ki value 60 cross kre gi to second ki value main 1 add ho jae ga
+		{
+			se++;
+			sec.innerText=se;
+			mse=0;
+			if(se==59) // jb second ki value 60 cross kre gi to minute ki value main 1 add ho jae ga
+			{
+				mi++;
+				min.innerText=mi;
+				se=0;
+				if(mi==59)  // jb minute ki value 60 cross kre gi to hour ki value main 1 add ho jae ga
+				{
+					hr++;
+					hour.innerText=hr;
+					mi=0;
+				}
+			}
+			
+		}
+	}
+
+	document.getElementById("Start").addEventListener("click",start);
+	document.getElementById("Stop").addEventListener("click",stop);
+	document.getElementById("Clear").addEventListener("click",clear);
+</script>
+</body>
+</html>
